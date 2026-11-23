@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#292441">
+  <meta name="description" content="Lupuscope — a research workspace for published evidence on childhood-onset systemic lupus erythematosus.">
+  <title>Lupuscope | From Evidence to Insight</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.example.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" data-page="home" aria-label="Lupuscope home">
+        <span class="brand-mark">L</span>
+        <span><strong>Lupuscope</strong><small>FROM EVIDENCE TO INSIGHT</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="home"><span class="nav-icon">⌂</span>Overview</button>
+        <button class="nav-link" data-page="library"><span class="nav-icon">▤</span>Research library</button>
+        <button class="nav-link" data-page="analysis"><span class="nav-icon">◫</span>Evidence analysis</button>
+        <button class="nav-link" data-page="compare"><span class="nav-icon">⇄</span>Compare studies <span class="nav-count" id="compareCount">0</span></button>
+        <button class="nav-link" data-page="assistant"><span class="nav-icon">✳</span>Lupuscope AI</button>
+      </nav>
+      <div class="sidebar-label">PEOPLE &amp; RESOURCES</div>
+      <nav class="side-nav" aria-label="People and resources">
+        <button class="nav-link" data-page="parents"><span class="nav-icon">♡</span>Parents’ guide</button>
+        <button class="nav-link" data-page="care"><span class="nav-icon">⌖</span>Find care</button>
+        <button class="nav-link" data-page="community"><span class="nav-icon">◎</span>Community demo</button>
+        <button class="nav-link" data-page="about"><span class="nav-icon">ⓘ</span>About &amp; privacy</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="prototype-note"><span class="status-dot"></span><div><strong>Research prototype</strong><small>Not a medical device</small></div></div>
+        <button class="text-button" id="switchRole">Switch user view</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+          <div><div class="eyebrow" id="breadcrumb">WORKSPACE / OVERVIEW</div><div class="top-title" id="topTitle">Overview</div></div>
+        </div>
+        <div class="topbar-actions">
+          <span class="role-chip" id="roleChip">Researcher view</span>
+          <label class="language-control" aria-label="Choose interface language">
+            <span aria-hidden="true">文</span>
+            <select id="languageSelect" aria-label="Choose language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+          <button class="icon-button" id="topAssistant" aria-label="Open Lupuscope AI">✳</button>
+          <div class="avatar">L</div>
+        </div>
+      </header>
+
+      <section class="page active" id="page-home">
+        <div class="hero-panel">
+          <div class="hero-copy">
+            <div class="hero-kicker"><span class="spark">✦</span> A CHILDHOOD LUPUS EVIDENCE WORKSPACE</div>
+            <h1>Turn published evidence<br><em>into clearer questions.</em></h1>
+            <p>Organize research on childhood-onset systemic lupus erythematosus, compare published findings, and explore where the evidence is still limited.</p>
+            <div class="hero-actions"><button class="btn btn-light" data-go="library">Explore research <span>↗</span></button><button class="btn btn-ghost-light" data-go="assistant">Ask Lupuscope AI</button></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="orb-core"><span>cSLE</span><small>evidence</small></div>
+            <span class="orb-tag tag-one">GENETICS</span><span class="orb-tag tag-two">CLINICAL</span><span class="orb-tag tag-three">IMMUNOLOGY</span>
+          </div>
+          <div class="hero-foot"><span>Association is not causation.</span><span>Every claim should be traceable to its source.</span><span>Missing data stays missing.</span></div>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">YOUR RESEARCH SNAPSHOT</div><h2>Evidence at a glance</h2></div><span class="updated-label">Curated starting library · 32 records</span></div>
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon teal">▤</span><span class="metric-trend">+14 added</span></div><strong id="metricStudies">32</strong><span>Study records</span><small>Original library plus new candidate records</small></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon mint">⌘</span><span class="metric-trend neutral">7 domains</span></div><strong id="metricDomains">7</strong><span>Research domains</span><small>Including musculoskeletal &amp; mucocutaneous</small></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon gold">◌</span><span class="metric-trend neutral">Abstract-stage</span></div><strong>14</strong><span>New candidate records</span><small>Require formal screening and verification</small></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon violet">✳</span><span class="metric-trend neutral">Guided demo</span></div><strong>2</strong><span>User pathways</span><small>Researcher / clinician and parent / guardian</small></article>
+        </div>
+
+        <div class="content-grid home-grid">
+          <section class="panel-card domain-panel">
+            <div class="panel-heading"><div><div class="eyebrow">EVIDENCE MAP</div><h3>Explore by research domain</h3></div><button class="quiet-link" data-go="library">View library ↗</button></div>
+            <div class="domain-list" id="homeDomains"></div>
+          </section>
+          <section class="panel-card assistant-promo">
+            <div class="assistant-orb">✳</div><div class="eyebrow">YOUR RESEARCH COMPANION</div><h3>Meet Lupuscope AI</h3><p>A guided assistant that helps users navigate the platform, understand research terms, and locate relevant studies in this library.</p><button class="btn btn-primary" data-go="assistant">Start a conversation <span>→</span></button><small class="muted-note">Guided demo mode · A real AI model needs a secure backend.</small>
+          </section>
+        </div>
+        <section class="panel-card recent-panel"><div class="panel-heading"><div><div class="eyebrow">RECENTLY ADDED</div><h3>New candidate studies</h3></div><button class="quiet-link" data-go="library">Browse all 32 ↗</button></div><div id="recentStudies" class="recent-list"></div></section>
+        <div class="disclaimer-strip"><strong>Important research boundary</strong><span>Lupuscope describes and organizes published literature. It does not diagnose, predict disease, recommend treatment, or replace a qualified clinician.</span></div>
+      </section>
+
+      <section class="page" id="page-library">
+        <div class="page-intro"><div><div class="eyebrow">PUBLISHED LITERATURE</div><h1>Research library</h1><p>Browse the curated starter set by topic, study type, or keyword. Open the original source before using any result in a report.</p></div><div class="intro-stat"><strong id="libraryResultCount">32</strong><span>records shown</span></div></div>
+        <div class="library-tabs" id="libraryTabs">
+          <button class="library-tab active" data-library-view="browse">Browse studies</button>
+          <button class="library-tab" data-library-view="extract">Extraction sheet</button>
+          <button class="library-tab" data-library-view="screen">Screening flow</button>
+          <button class="library-tab" data-library-view="pubmed">Latest on PubMed</button>
+        </div>
+        <div id="libraryBrowseView">
+        <div class="library-toolbar"><label class="search-wrap"><span>⌕</span><input id="studySearch" type="search" placeholder="Search titles, topics, tags, or IDs…" autocomplete="off"></label><select id="typeFilter" aria-label="Filter by study type"><option value="">All study types</option><option value="meta">Systematic review / meta-analysis</option><option value="review">Narrative review</option><option value="cohort">Cohort / cross-sectional</option><option value="casecontrol">Case-control / genetic association</option></select><select id="yearSort" aria-label="Sort studies"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="az">Title A–Z</option></select><button class="btn btn-primary export-refs" id="exportReferences">Export references ↓</button></div>
+        <div class="library-layout"><aside class="category-filter"><div class="eyebrow">RESEARCH DOMAINS</div><div id="categoryButtons" class="category-buttons"></div><div class="filter-legend"><span class="legend-dot original"></span> Original prototype record<br><span class="legend-dot candidate"></span> New candidate record</div></aside><div class="study-results"><div id="activeFilterLabel" class="results-label">All research domains</div><div id="studyGrid" class="study-grid"></div><div id="emptyStudies" class="empty-state hidden">No records match this search. Try another term or clear the filters.</div></div></div>
+        <div class="method-note"><strong>Screening status:</strong> The 14 new records are candidate additions identified from PubMed / PubMed Central records. Their presence here does not mean they have passed your final inclusion criteria, duplicate checks, risk-of-bias assessment, or full-text review.</div>
+        </div>
+        <div id="libraryExtractView" class="hidden library-tool-view"></div>
+        <div id="libraryScreenView" class="hidden library-tool-view"></div>
+        <div id="libraryPubmedView" class="hidden library-tool-view"></div>
+      </section>
+
+      <section class="page" id="page-analysis">
+        <div class="page-intro"><div><div class="eyebrow">LIBRARY-LEVEL ANALYSIS</div><h1>Evidence analysis</h1><p>Explore how records are distributed across the current library. These indicators describe this curated set only, not the entire cSLE literature.</p></div><span class="soft-badge">No patient-level data</span></div>
+        <div class="analysis-grid"><section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">A · COVERAGE</div><h3>Evidence weight by domain</h3></div></div><p class="panel-copy">A simple prototype heuristic assigns different weights to study types. It is not a validated quality score.</p><div id="weightChart" class="weight-chart"></div><div class="formula-box"><b>Current prototype formula</b><code>Wₜ = Σ wᵢ</code><small>Meta-analysis = 1.0 · Cohort / cross-sectional / case-control = 0.6 · Narrative review = 0.4</small><code>Gₜ = 1 − Wₜ / max(W)</code><small>A higher G indicates lower weighted representation within this library, not a proven research gap.</small></div></section>
+          <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">B · STUDY MIX</div><h3>Record types</h3></div></div><div id="typeBreakdown" class="type-breakdown"></div><div class="caution-card"><span class="caution-symbol">!</span><div><strong>Interpret carefully</strong><p>Study design alone does not establish quality. Sample size, methods, population, risk of bias, and outcome definitions still require appraisal.</p></div></div></section></div>
+        <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">C · SHARED TOPICS</div><h3>Cross-domain tag connections</h3></div></div><p class="panel-copy">The table shows pairs of studies with overlapping tags. It is a reading aid, not evidence that the studies establish a biological relationship.</p><div class="table-wrap"><table><thead><tr><th>Study A</th><th>Study B</th><th>Similarity</th><th>Shared tags</th></tr></thead><tbody id="similarityRows"></tbody></table></div></section>
+        <div class="analysis-grid analysis-extra-grid">
+          <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">D · EVIDENCE MAP</div><h3>Domain × study type matrix</h3></div></div><p class="panel-copy">Select a cell to filter the library. Counts describe records currently in this curated set.</p><div id="evidenceMatrix" class="evidence-matrix"></div></section>
+          <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">E · RESEARCH TIMELINE</div><h3>Records by publication year</h3></div></div><p class="panel-copy">Only records with a recorded publication year are included.</p><div id="researchTimeline" class="timeline-chart"></div></section>
+        </div>
+        <div class="analysis-grid analysis-extra-grid">
+          <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">F · POTENTIAL GAPS</div><h3>Topics with lower representation</h3></div></div><p class="panel-copy">A screening aid based on this library's record counts and metadata, not proof of a global research gap.</p><div id="gapDetector" class="gap-list"></div></section>
+          <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">G · APPRAISAL STATUS</div><h3>Risk-of-bias assessment tracker</h3></div></div><p class="panel-copy">No study-level risk-of-bias judgments are supplied in the starter data. Add verified human assessments before interpreting quality.</p><div id="biasTracker" class="bias-tracker"></div></section>
+        </div>
+        <section class="panel-card meta-calculator"><div class="panel-heading"><div><div class="eyebrow">D · META-ANALYSIS CALCULATOR</div><h3>Pool odds ratios with 95% confidence intervals</h3></div><span class="soft-badge">Statistical demo</span></div><p class="panel-copy">Enter values copied and checked from original studies. This calculator demonstrates fixed-effect and DerSimonian–Laird random-effects calculations. It does not decide whether studies are scientifically comparable.</p><div class="meta-formula">y = ln(OR) · SE = [ln(upper CI) − ln(lower CI)] / 3.92 · weight = 1 / SE²</div><div id="metaRows" class="meta-rows"></div><div class="meta-actions"><button class="btn btn-secondary" id="addMetaRow" type="button">+ Add study</button><button class="btn btn-secondary" id="loadMetaExample" type="button">Load invented example</button><button class="btn btn-primary" id="runMeta" type="button">Calculate</button></div><pre id="metaOutput" class="meta-output">Enter at least two studies. Use only verified OR and 95% CI values.</pre><div id="forestPlot" class="forest-plot-wrap" aria-live="polite"></div><div class="warning-banner"><strong>Interpretation boundary</strong><span>Do not pool studies merely because they report an OR. Check population, outcome definitions, effect measures, study design, and risk of bias. A pooled association is not proof of causation.</span></div></section>
+      </section>
+
+      <section class="page" id="page-compare">
+        <div class="page-intro"><div><div class="eyebrow">SIDE-BY-SIDE REVIEW</div><h1>Compare studies</h1><p>Select up to three records from the library to compare their type, population, findings, and source details.</p></div><span class="soft-badge">Up to 3 studies</span></div>
+        <section class="panel-card"><div class="panel-heading"><div><div class="eyebrow">YOUR SHORTLIST</div><h3>Selected studies</h3></div><button class="quiet-link" id="clearCompare">Clear selection</button></div><div id="compareView" class="compare-view"></div></section>
+      </section>
+
+      <section class="page" id="page-assistant">
+        <div class="page-intro assistant-page-intro"><div><div class="eyebrow">GUIDE · EXPLAIN · EXPLORE</div><h1>Lupuscope AI</h1><p>Ask naturally in Arabic or English. When connected, the assistant uses the Lupuscope research library and cites relevant records.</p></div><span class="soft-badge demo-badge"><span class="status-dot"></span> AI connection status</span></div>
+        <div class="assistant-layout"><aside class="assistant-side panel-card"><div class="assistant-profile"><div class="assistant-orb large">✳</div><div><strong>Lupuscope AI</strong><small>Evidence-aware guide</small></div></div><div class="eyebrow">YOUR CURRENT VIEW</div><div class="context-pill" id="assistantContext">Overview</div><div class="eyebrow">SUGGESTED PROMPTS</div><button class="prompt-button" data-prompt="Help me find studies about lupus nephritis in children.">Find kidney studies <span>↗</span></button><button class="prompt-button" data-prompt="Explain odds ratio and a 95% confidence interval in simple terms.">Explain OR and 95% CI <span>↗</span></button><button class="prompt-button" data-prompt="How do I use the extraction sheet?">Guide me through extraction <span>↗</span></button><button class="prompt-button" data-prompt="What can parents find in this website?">Show parent resources <span>↗</span></button><div class="assistant-safety"><strong>Safety boundary</strong><p>This demo does not diagnose, interpret an individual child's symptoms, or recommend treatment. It uses the site's curated content and general educational explanations.</p></div></aside>
+          <section class="chat-panel panel-card"><div class="chat-top"><div><strong>Conversation</strong><small id="assistantMode">AI connection status will appear here.</small></div><button id="clearChat" class="icon-button" aria-label="Clear conversation">↻</button></div><div id="chatMessages" class="chat-messages" aria-live="polite"><div class="chat-message assistant" id="assistantWelcome" dir="ltr"><div class="chat-avatar">✳</div><div class="message-body"><strong id="welcomeTitle">Welcome!</strong><p id="welcomeText">Hi! I’m Lupuscope AI. Ask me naturally about childhood lupus research, studies in our library, or research terms. Let’s explore together.</p></div></div></div><div class="chat-compose"><textarea id="chatInput" rows="1" placeholder="اكتب سؤالك بالعربي أو English…"></textarea><button id="sendChat" class="send-button" aria-label="Send message">↑</button></div><div class="chat-footnote">Do not enter names, contact details, medical records, or other private information.</div></section></div>
+      </section>
+
+      <section class="page" id="page-parents">
+        <div class="page-intro"><div><div class="eyebrow">FAMILY EDUCATION</div><h1>Parents’ guide</h1><p>General educational information to help families understand terms and prepare for conversations with their child's care team.</p></div><span class="soft-badge">Educational only</span></div>
+        <div class="guide-grid"><section class="panel-card"><div class="eyebrow">START HERE</div><h3>What is childhood-onset lupus?</h3><p>Systemic lupus erythematosus (SLE) is an autoimmune condition. In childhood-onset SLE, the disease begins before age 18. It can affect different body systems, and experiences vary from one person to another.</p><div class="resource-callout"><strong>Remember</strong><span>Symptoms and test results need to be assessed by a qualified clinician. This website cannot tell whether a child has lupus.</span></div></section><section class="panel-card"><div class="eyebrow">PREPARE FOR AN APPOINTMENT</div><h3>Questions families may ask</h3><ul class="clean-list"><li>What does this test result mean in my child's situation?</li><li>Which changes should prompt us to contact the care team?</li><li>Who should we contact outside clinic hours?</li><li>What should we know about the medicines prescribed?</li><li>Which specialists are involved in my child's care?</li></ul></section></div>
+        <section class="panel-card glossary-panel"><div class="panel-heading"><div><div class="eyebrow">PLAIN-LANGUAGE GLOSSARY</div><h3>Understand the terminology</h3></div><label class="small-search"><span>⌕</span><input id="glossarySearch" type="search" placeholder="Find a term…"></label></div><div id="glossaryGrid" class="glossary-grid"></div></section>
+        <section class="panel-card"><div class="eyebrow">LOCAL DEMO TOOL</div><h3>Symptom diary layout preview</h3><p class="panel-copy">The original prototype included a browser-local diary. This preview is intentionally not a medical record system. Do not enter real patient details or identifiable health information.</p><div class="diary-demo"><label>Date <input type="date" id="diaryDate"></label><label>General note <input id="diaryNote" maxlength="120" placeholder="Example: appointment questions to remember"></label><button class="btn btn-primary" id="saveDiary">Save demo note</button><span id="diaryStatus" class="muted-note">Stored only in this browser for demonstration.</span></div><div id="diaryNotes" class="diary-notes"></div></section>
+      </section>
+
+      <section class="page" id="page-care">
+        <div class="page-intro"><div><div class="eyebrow">CARE DIRECTORY GUIDE</div><h1>Find care</h1><p>Search a map for a relevant healthcare specialty or children's hospital. Listings are not verified or endorsed by Lupuscope.</p></div><span class="soft-badge">External map search</span></div>
+        <section class="panel-card care-search-card"><div class="eyebrow">START A LOCAL SEARCH</div><h3>Choose a specialty and location</h3><div class="care-form"><label>Specialty<select id="careSpecialty"><option value="pediatric rheumatologist">Pediatric rheumatologist</option><option value="pediatric nephrologist">Pediatric nephrologist</option><option value="children's hospital">Children's hospital</option><option value="pediatric clinic">Pediatric clinic</option></select></label><label>City or area<input id="careLocation" placeholder="Example: Cairo, Egypt"></label><button class="btn btn-primary" id="careSearch">Search map ↗</button><button class="btn btn-secondary" id="useMyLocation" type="button">◎ Use my current location</button></div><p id="locationStatus" class="location-status" role="status">Your location is only requested after you press the button. Browser permission is required.</p><div class="resource-callout"><strong>Before relying on a listing</strong><span>Confirm the clinician's specialty, age range served, availability, and appointment process directly with the healthcare provider.</span></div><div id="careMap" class="map-placeholder"><div class="map-symbol">⌖</div><strong>Your map search will appear here</strong><span>Search by area or allow location access to center the map near you.</span></div></section>
+      </section>
+
+      <section class="page" id="page-community">
+        <div class="page-intro"><div><div class="eyebrow">COMMUNITY CONCEPT</div><h1>Community demo</h1><p>A visual preview of how a moderated information space could work. This is not a live community forum.</p></div><span class="soft-badge">Local-only demo</span></div>
+        <section class="panel-card"><div class="warning-banner"><strong>Prototype limitation</strong><span>Posts remain in this browser only. There is no verified clinician moderation, server-side account system, or secure messaging. Do not submit health information or personal details.</span></div><h3>Share a general resource question</h3><form id="communityForm" class="community-form"><label>Topic title<input id="communityTitle" required maxlength="90" placeholder="Example: Understanding a research term"></label><label>Message<textarea id="communityMessage" required maxlength="500" rows="3" placeholder="Keep your post general. Do not include personal medical information."></textarea></label><button class="btn btn-primary" type="submit">Add demo post</button></form><div class="eyebrow posts-label">LOCAL DEMO POSTS</div><div id="communityPosts"></div></section>
+      </section>
+
+      <section class="page" id="page-about">
+        <div class="page-intro"><div><div class="eyebrow">PROJECT INFORMATION</div><h1>About Lupuscope</h1><p>From evidence to insight — a student research prototype for organizing published research on childhood-onset systemic lupus erythematosus.</p></div><span class="soft-badge">Student research prototype</span></div>
+        <div class="about-grid"><section class="panel-card"><div class="eyebrow">PURPOSE</div><h3>What Lupuscope is designed to do</h3><p>Lupuscope aims to organize published cSLE studies, compare findings, and help identify areas of the literature that may need further investigation.</p><p>Its current library-level analysis uses study metadata and topic tags. It does not analyze patient-level records.</p></section><section class="panel-card"><div class="eyebrow">SOURCES</div><h3>Where records come from</h3><p>The starter library contains PubMed / PubMed Central records and official health-information links. The 14 additions are candidate records for the next screening round.</p><p>Open the original article and verify each detail before citing it or adding it to the final evidence set.</p></section></div>
+        <section class="panel-card"><div class="eyebrow">PRIVACY &amp; LIMITATIONS</div><h3>What this prototype does not provide</h3><ul class="clean-list"><li>No secure server-side authentication or verified professional credentials.</li><li>No encrypted patient database or secure medical-record storage.</li><li>No diagnosis, disease prediction, treatment recommendation, or clinical decision support.</li><li>No real clinician moderation of community posts.</li><li>No clinically validated AI. The default assistant is a guided local demo.</li><li>Machine translation and automatically generated summaries may contain errors and require human review.</li></ul><div class="resource-callout"><strong>Data protection</strong><span>Do not enter real patient information. Local browser storage is not a secure medical-data environment. A public launch would require specialist, security, privacy, and legal review.</span></div></section>
+      </section>
+
+      <footer class="app-footer"><span>© Lupuscope · Educational research prototype</span><span>Association is not causation · No diagnosis or treatment advice</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="roleModal" role="dialog" aria-modal="true" aria-labelledby="roleTitle"><div class="modal-card role-modal"><button class="modal-close" data-close-modal aria-label="Close">×</button><div class="brand-mark modal-brand-mark">L</div><div class="eyebrow">WELCOME TO LUPUSCOPE</div><h2 id="roleTitle">Choose your workspace</h2><p>This choice only adjusts the guide prompts and does not verify a user's identity or professional status.</p><div class="role-options"><button class="role-option" data-role="researcher"><span class="role-option-icon">⌘</span><span><strong>Doctor · Researcher · Scientist</strong><small>Research library, study comparison, and analysis tools</small></span><b>→</b></button><button class="role-option" data-role="parent"><span class="role-option-icon">♡</span><span><strong>Parent or guardian</strong><small>Plain-language guide, glossary, and care-search guidance</small></span><b>→</b></button></div><small class="muted-note">Demo only · No account or personal information required.</small></div></div>
+
+  <div class="modal-backdrop hidden" id="studyModal" role="dialog" aria-modal="true" aria-labelledby="studyModalTitle"><div class="modal-card study-modal"><button class="modal-close" data-close-modal aria-label="Close">×</button><div id="studyModalContent"></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
